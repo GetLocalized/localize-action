@@ -28,7 +28,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run Localize-Action
-        uses: your-username/localize-action@v1
+        uses: GetLocalized/localize-action@main
         with:
           api-key: ${{ secrets.LOCALIZE_API_KEY }}
           i18n-directory: 'src/locales'
@@ -62,7 +62,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run Localize-Action
-        uses: your-username/localize-action@v1
+        uses: GetLocalized/localize-action@main
         with:
           api-key: ${{ secrets.LOCALIZE_API_KEY }}
           i18n-directory: 'src/locales'
