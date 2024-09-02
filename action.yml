@@ -2,6 +2,11 @@ name: "Translate and Create Pull Request"
 description: >
     This GitHub Action translates files in a specified directory and creates a
     pull request with the translated content.
+
+branding:
+    icon: "globe"
+    color: "yellow"
+
 inputs:
     GITHUB_TOKEN:
         description: >
