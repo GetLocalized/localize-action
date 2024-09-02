@@ -32,7 +32,7 @@ runs:
         - name: Checkout action repository
           uses: actions/checkout@v2
           with:
-              repository: GetLocalized/getlocalized-action
+              repository: GetLocalized/localize-action
               ref: main
               path: action-repo
 
