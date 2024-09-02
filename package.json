@@ -1,0 +1,33 @@
+{
+    "name": "localize-action",
+    "version": "1.0.0",
+    "description": "**Automate your app’s localization with seamless i18n translations using the Localize-Action GitHub Action.**",
+    "main": "create-translation-files.mjs",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/GetLocalized/localize-action.git"
+    },
+    "keywords": [
+        "i18n",
+        "translation",
+        "localize",
+        "translate",
+        "action"
+    ],
+    "author": "Jordan Chalupka",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/GetLocalized/localize-action/issues"
+    },
+    "homepage": "https://github.com/GetLocalized/localize-action#readme",
+    "dependencies": {
+        "@actions/core": "^1.10.1",
+        "@actions/github": "^6.0.0",
+        "@actions/glob": "^0.5.0",
+        "@octokit/rest": "^21.0.2",
+        "node-fetch": "^2.7.0"
+    }
+}

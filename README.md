@@ -14,6 +14,8 @@
 
 To use the Localize-Action in your workflow, simply add it to your GitHub Actions workflow file.
 
+Here’s an example workflow that uses the Localize-Action to automatically translate your i18n files whenever you push to the `main` branch:
+
 ```yaml
 name: Localize i18n Files
 
@@ -30,8 +32,10 @@ jobs:
       - name: Run Localize-Action
         uses: GetLocalized/localize-action@main
         with:
-          api-key: ${{ secrets.LOCALIZE_API_KEY }}
-          i18n-directory: 'src/locales'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          I18N_DIRECTORY: "src/locales"
+          DEFAULT_LANGUAGE: "en"
+          TARGET_LANGUAGES: "fr,es"
 ```
 
 ## 🔧 Configuration
@@ -40,35 +44,6 @@ jobs:
 - **`i18n-directory` (required):** The directory where your i18n files are stored.
 - **`default-language` (optional):** The default language for your translations (e.g., `en` for English).
 - **`target-languages` (optional):** A comma-separated list of target languages (e.g., `fr,es,de`).
-
-## 🎯 Example Workflow
-
-Here’s an example workflow that uses the Localize-Action to automatically translate your i18n files whenever you push to the `main` branch:
-
-```yaml
-name: Localize i18n Files
-
-on:
-  push:
-    branches:
-      - main
-
-jobs:
-  translate:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Run Localize-Action
-        uses: GetLocalized/localize-action@main
-        with:
-          api-key: ${{ secrets.LOCALIZE_API_KEY }}
-          i18n-directory: 'src/locales'
-          default-language: 'en'
-          target-languages: 'fr,es,de'
-```
 
 ## 🛠️ Customization
 
