@@ -1,0 +1,60 @@
+name: "Translate and Create Pull Request"
+description: >
+    This GitHub Action translates files in a specified directory and creates a
+    pull request with the translated content.
+inputs:
+    GITHUB_TOKEN:
+        description: >
+            GitHub token with permissions to create branches, commits, and pull
+            requests.
+        required: true
+    I18N_DIRECTORY:
+        description: "Relative path to the directory containing the translation files."
+        required: true
+    DEFAULT_LANGUAGE:
+        description: >
+            Language code of the source language used for generating translations
+            (e.g., en).
+        required: true
+    TARGET_LANGUAGES:
+        description: >
+            Comma-separated list of target language codes to translate into (e.g.,
+            fr,de,es).
+        required: true
+runs:
+    using: "composite"
+    steps:
+        - name: Checkout current repository
+          uses: actions/checkout@v2
+          with:
+              path: tmp
+
+        - name: Checkout action repository
+          uses: actions/checkout@v2
+          with:
+              repository: GetLocalized/getlocalized-action
+              ref: main
+              path: action-repo
+
+        - name: Set up Node.js
+          uses: actions/setup-node@v2
+          with:
+              node-version: "14"
+
+        - name: Install dependencies
+          run: npm install
+          working-directory: action-repo
+          shell: bash
+
+        - name: Run Translate and Create PR
+          run: node ../action-repo/translate-and-create-pr.mjs
+          env:
+              GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
+              I18N_DIRECTORY: ${{ inputs.I18N_DIRECTORY }}
+              DEFAULT_LANGUAGE: ${{ inputs.DEFAULT_LANGUAGE }}
+              TARGET_LANGUAGES: ${{ inputs.TARGET_LANGUAGES }}
+              REPO_NAME: ${{ github.event.pull_request.head.repo.name }}
+              GITHUB_EVENT_PULL_REQUEST_NUMBER: ${{ github.event.pull_request.number }}
+              BASE_BRANCH: ${{ github.event.pull_request.head.ref }}
+          working-directory: tmp
+          shell: bash
